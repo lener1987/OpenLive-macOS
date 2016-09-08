@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol LiveRoomVCDelegate: NSObjectProtocol {
-    func liveRoomVCNeedClose(liveVC: LiveRoomViewController)
+    func liveRoomVCNeedClose(_ liveVC: LiveRoomViewController)
 }
 
 class LiveRoomViewController: NSViewController {
@@ -22,7 +22,7 @@ class LiveRoomViewController: NSViewController {
     
     //MARK: public var
     var roomName: String!
-    var clientRole = AgoraRtcClientRole.ClientRole_Audience {
+    var clientRole = AgoraRtcClientRole.clientRole_Audience {
         didSet {
             updateButtonsVisiablity()
         }
@@ -32,16 +32,16 @@ class LiveRoomViewController: NSViewController {
     
     //MARK: engine & session
     var rtcEngine: AgoraRtcEngineKit!
-    private var isBroadcaster: Bool {
-        return clientRole == .ClientRole_Broadcaster
+    fileprivate var isBroadcaster: Bool {
+        return clientRole == .clientRole_Broadcaster
     }
-    private var isMuted = false {
+    fileprivate var isMuted = false {
         didSet {
             rtcEngine.muteLocalAudioStream(isMuted)
             muteAudioButton?.image = NSImage(named: isMuted ? "btn_mute_blue" : "btn_mute")
         }
     }
-    private var videoSessions = [VideoSession]() {
+    fileprivate var videoSessions = [VideoSession]() {
         didSet {
             guard remoteContainerView != nil else {
                 return
@@ -49,14 +49,14 @@ class LiveRoomViewController: NSViewController {
             updateInterface()
         }
     }
-    private var fullSession: VideoSession? {
+    fileprivate var fullSession: VideoSession? {
         didSet {
             if fullSession != oldValue && remoteContainerView != nil {
                 updateInterface()
             }
         }
     }
-    private let viewLayouter = VideoViewLayouter()
+    fileprivate let viewLayouter = VideoViewLayouter()
     
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -74,22 +74,22 @@ class LiveRoomViewController: NSViewController {
     }
     
     //MARK: - user action
-    @IBAction func doMuteClicked(sender: NSButton) {
+    @IBAction func doMuteClicked(_ sender: NSButton) {
         isMuted = !isMuted
     }
     
-    @IBAction func doBroadcastClicked(sender: NSButton) {
+    @IBAction func doBroadcastClicked(_ sender: NSButton) {
         if isBroadcaster {
-            clientRole = .ClientRole_Audience
+            clientRole = .clientRole_Audience
         } else {
-            clientRole = .ClientRole_Broadcaster
+            clientRole = .clientRole_Broadcaster
         }
         
         rtcEngine.setClientRole(clientRole)
         updateInterface()
     }
     
-    override func mouseUp(theEvent: NSEvent) {
+    override func mouseUp(with theEvent: NSEvent) {
         if theEvent.clickCount == 2 {
             if fullSession == nil {
                 if let tappedSession = viewLayouter.reponseSessionOfEvent(theEvent, inSessions: videoSessions, inContainerView: remoteContainerView) {
@@ -101,7 +101,7 @@ class LiveRoomViewController: NSViewController {
         }
     }
     
-    @IBAction func doLeaveClicked(sender: NSButton) {
+    @IBAction func doLeaveClicked(_ sender: NSButton) {
         leaveChannel()
     }
 }
@@ -110,7 +110,7 @@ class LiveRoomViewController: NSViewController {
 private extension LiveRoomViewController {
     func updateButtonsVisiablity() {
         broadcastButton?.image = NSImage(named: isBroadcaster ? "btn_join_cancel" : "btn_join")
-        muteAudioButton?.hidden = !isBroadcaster
+        muteAudioButton?.isHidden = !isBroadcaster
     }
     
     func leaveChannel() {
@@ -128,23 +128,15 @@ private extension LiveRoomViewController {
         delegate?.liveRoomVCNeedClose(self)
     }
     
-    func alertEngineString(string: String) {
-        alertString("Engine: \(string)")
-    }
-    
-    func alertAppString(string: String) {
-        alertString("App: \(string)")
-    }
-    
-    func alertString(string: String) {
+    func alert(string: String) {
         guard !string.isEmpty else {
             return
         }
         
         let alert = NSAlert()
         alert.messageText = string
-        alert.addButtonWithTitle("OK")
-        alert.beginSheetModalForWindow(view.window!, completionHandler: nil)
+        alert.addButton(withTitle: "OK")
+        alert.beginSheetModal(for: view.window!, completionHandler: nil)
     }
 }
 
@@ -155,17 +147,17 @@ private extension LiveRoomViewController {
             displaySessions.removeFirst()
         }
         viewLayouter.layoutSessions(displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
-        setStreamTypeForSessions(displaySessions, fullSession: fullSession)
+        setStreamType(forSessions: displaySessions, fullSession: fullSession)
     }
     
-    func setStreamTypeForSessions(sessions: [VideoSession], fullSession: VideoSession?) {
+    func setStreamType(forSessions sessions: [VideoSession], fullSession: VideoSession?) {
         if let fullSession = fullSession {
             for session in sessions {
-                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: (session == fullSession ? .VideoStream_High : .VideoStream_Low))
+                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: (session == fullSession ? .videoStream_High : .videoStream_Low))
             }
         } else {
             for session in sessions {
-                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: .VideoStream_High)
+                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: .videoStream_High)
             }
         }
     }
@@ -176,7 +168,7 @@ private extension LiveRoomViewController {
         rtcEngine.setupLocalVideo(localSession.canvas)
     }
     
-    func fetchSessionOfUid(uid: Int64) -> VideoSession? {
+    func fetchSession(ofUid uid: Int64) -> VideoSession? {
         for session in videoSessions {
             if session.uid == uid {
                 return session
@@ -186,8 +178,8 @@ private extension LiveRoomViewController {
         return nil
     }
     
-    func videoSessionOfUid(uid: Int64) -> VideoSession {
-        if let fetchedSession = fetchSessionOfUid(uid) {
+    func videoSession(ofUid uid: Int64) -> VideoSession {
+        if let fetchedSession = fetchSession(ofUid: uid) {
             return fetchedSession
         } else {
             let newSession = VideoSession(uid: uid)
@@ -200,8 +192,8 @@ private extension LiveRoomViewController {
 //MARK: - Agora SDK
 private extension LiveRoomViewController {
     func loadAgoraKit() {
-        rtcEngine = AgoraRtcEngineKit.sharedEngineWithAppId(KeyCenter.AppId, delegate: self)
-        rtcEngine.setChannelProfile(.ChannelProfile_LiveBroadcasting)
+        rtcEngine = AgoraRtcEngineKit.sharedEngine(withAppId: KeyCenter.AppId, delegate: self)
+        rtcEngine.setChannelProfile(.channelProfile_LiveBroadcasting)
         rtcEngine.enableVideo()
         rtcEngine.enableDualStreamMode(true)
         rtcEngine.setVideoProfile(videoProfile)
@@ -213,37 +205,37 @@ private extension LiveRoomViewController {
         
         addLocalSession()
         
-        let code = rtcEngine.joinChannelByKey(nil, channelName: roomName, info: nil, uid: 0, joinSuccess: nil)
+        let code = rtcEngine.joinChannel(byKey: nil, channelName: roomName, info: nil, uid: 0, joinSuccess: nil)
         if code != 0 {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.alertEngineString("\(NSLocalizedString("Join channel failed: ", comment: ""))\(code)")
+            DispatchQueue.main.async(execute: {
+                self.alert(string: "Join channel failed: \(code)")
             })
         }
     }
 }
 
 extension LiveRoomViewController: AgoraRtcEngineDelegate {
-    func rtcEngine(engine: AgoraRtcEngineKit!, firstRemoteVideoDecodedOfUid uid: UInt, size: CGSize, elapsed: Int) {
-        let userSession = videoSessionOfUid(Int64(uid))
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, firstRemoteVideoDecodedOfUid uid: UInt, size: CGSize, elapsed: Int) {
+        let userSession = videoSession(ofUid: Int64(uid))
         rtcEngine.setupRemoteVideo(userSession.canvas)
     }
     
-    func rtcEngine(engine: AgoraRtcEngineKit!, firstLocalVideoFrameWithSize size: CGSize, elapsed: Int) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, firstLocalVideoFrameWith size: CGSize, elapsed: Int) {
         if let _ = videoSessions.first {
             updateInterface()
         }
     }
     
-    func rtcEngine(engine: AgoraRtcEngineKit!, didOfflineOfUid uid: UInt, reason: AgoraRtcUserOfflineReason) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didOfflineOfUid uid: UInt, reason: AgoraRtcUserOfflineReason) {
         var indexToDelete: Int?
-        for (index, session) in videoSessions.enumerate() {
+        for (index, session) in videoSessions.enumerated() {
             if session.uid == Int64(uid) {
                 indexToDelete = index
             }
         }
         
         if let indexToDelete = indexToDelete {
-            let deletedSession = videoSessions.removeAtIndex(indexToDelete)
+            let deletedSession = videoSessions.remove(at: indexToDelete)
             deletedSession.hostingView.removeFromSuperview()
             
             if deletedSession == fullSession {
@@ -255,7 +247,7 @@ extension LiveRoomViewController: AgoraRtcEngineDelegate {
 
 //MARK: - window
 extension LiveRoomViewController: NSWindowDelegate {
-    func windowShouldClose(sender: AnyObject) -> Bool {
+    func windowShouldClose(_ sender: Any) -> Bool {
         leaveChannel()
         return false
     }

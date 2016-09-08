@@ -13,13 +13,13 @@ class MainViewController: NSViewController {
     @IBOutlet weak var roomInputTextField: NSTextField!
     
     var videoProfile = AgoraRtcVideoProfile._VideoProfile_360P
-    private var agoraKit: AgoraRtcEngineKit!
+    fileprivate var agoraKit: AgoraRtcEngineKit!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.whiteColor().CGColor
+        view.layer?.backgroundColor = NSColor.white.cgColor
     }
     
     override func viewDidAppear() {
@@ -27,8 +27,8 @@ class MainViewController: NSViewController {
         roomInputTextField.becomeFirstResponder()
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        guard let segueId = segue.identifier where !segueId.isEmpty else {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard let segueId = segue.identifier , !segueId.isEmpty else {
             return
         }
         
@@ -40,7 +40,7 @@ class MainViewController: NSViewController {
             let liveVC = segue.destinationController as! LiveRoomViewController
             liveVC.roomName = roomInputTextField.stringValue
             liveVC.videoProfile = videoProfile
-            if let value = sender as? NSNumber, let role = AgoraRtcClientRole(rawValue: value.integerValue) {
+            if let value = sender as? NSNumber, let role = AgoraRtcClientRole(rawValue: value.intValue) {
                 liveVC.clientRole = role
             }
             liveVC.delegate = self
@@ -48,52 +48,45 @@ class MainViewController: NSViewController {
     }
     
     //MARK: - user actions
-    @IBAction func doJoinAsAudienceClicked(sender: NSButton) {
-        guard let roomName = roomInputTextField?.stringValue where !roomName.isEmpty else {
+    @IBAction func doJoinAsAudienceClicked(_ sender: NSButton) {
+        guard let roomName = roomInputTextField?.stringValue , !roomName.isEmpty else {
             return
         }
-        joinWithRole(.ClientRole_Audience)
+        join(withRole: .clientRole_Audience)
     }
     
-    @IBAction func doJoinAsBroadcasterClicked(sender: NSButton) {
-        guard let roomName = roomInputTextField?.stringValue where !roomName.isEmpty else {
+    @IBAction func doJoinAsBroadcasterClicked(_ sender: NSButton) {
+        guard let roomName = roomInputTextField?.stringValue , !roomName.isEmpty else {
             return
         }
-        joinWithRole(.ClientRole_Broadcaster)
+        join(withRole: .clientRole_Broadcaster)
     }
     
-    @IBAction func doSettingsClicked(sender: NSButton) {
-        performSegueWithIdentifier("mainToSettings", sender: nil)
+    @IBAction func doSettingsClicked(_ sender: NSButton) {
+        performSegue(withIdentifier: "mainToSettings", sender: nil)
     }
 }
 
 private extension MainViewController {
-    func joinWithRole(role: AgoraRtcClientRole) {
-        performSegueWithIdentifier("mainToLive", sender: NSNumber(integer: role.rawValue))
+    func join(withRole role: AgoraRtcClientRole) {
+        performSegue(withIdentifier: "mainToLive", sender: NSNumber(value: role.rawValue as Int))
     }
 }
 
 extension MainViewController: SettingsVCDelegate {
-    func settingsVC(settingsVC: SettingsViewController, closeWithProfile profile: AgoraRtcVideoProfile) {
+    func settingsVC(_ settingsVC: SettingsViewController, closeWithProfile profile: AgoraRtcVideoProfile) {
         videoProfile = profile
         settingsVC.view.window?.contentViewController = self
     }
 }
 
 extension MainViewController: LiveRoomVCDelegate {
-    func liveRoomVCNeedClose(liveVC: LiveRoomViewController) {
+    func liveRoomVCNeedClose(_ liveVC: LiveRoomViewController) {
         guard let window = liveVC.view.window else {
             return
         }
         
-        if window.styleMask & NSFullScreenWindowMask == NSFullScreenWindowMask {
-            window.toggleFullScreen(nil)
-        }
-        
-        window.styleMask |= NSFullSizeContentViewWindowMask | NSMiniaturizableWindowMask
         window.delegate = nil
-        window.collectionBehavior = .Default
-
         window.contentViewController = self
     }
 }
