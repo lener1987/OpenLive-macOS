@@ -92,7 +92,7 @@ class LiveRoomViewController: NSViewController {
     override func mouseUp(with theEvent: NSEvent) {
         if theEvent.clickCount == 2 {
             if fullSession == nil {
-                if let tappedSession = viewLayouter.reponseSessionOfEvent(theEvent, inSessions: videoSessions, inContainerView: remoteContainerView) {
+                if let tappedSession = viewLayouter.responseSession(of: theEvent, inSessions: videoSessions, inContainerView: remoteContainerView) {
                     fullSession = tappedSession
                 }
             } else {
@@ -146,7 +146,7 @@ private extension LiveRoomViewController {
         if !isBroadcaster && !displaySessions.isEmpty {
             displaySessions.removeFirst()
         }
-        viewLayouter.layoutSessions(displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
+        viewLayouter.layout(sessions: displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
         setStreamType(forSessions: displaySessions, fullSession: fullSession)
     }
     
