@@ -85,7 +85,7 @@ class LiveRoomViewController: NSViewController {
             clientRole = .clientRole_Broadcaster
         }
         
-        rtcEngine.setClientRole(clientRole)
+        rtcEngine.setClientRole(clientRole, withKey:nil)
         updateInterface()
     }
     
@@ -197,7 +197,7 @@ private extension LiveRoomViewController {
         rtcEngine.enableVideo()
         rtcEngine.enableDualStreamMode(true)
         rtcEngine.setVideoProfile(videoProfile, swapWidthAndHeight: false)
-        rtcEngine.setClientRole(clientRole)
+        rtcEngine.setClientRole(clientRole, withKey:nil)
         
         if isBroadcaster {
             rtcEngine.startPreview()
