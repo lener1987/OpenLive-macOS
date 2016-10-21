@@ -196,7 +196,7 @@ private extension LiveRoomViewController {
         rtcEngine.setChannelProfile(.channelProfile_LiveBroadcasting)
         rtcEngine.enableVideo()
         rtcEngine.enableDualStreamMode(true)
-        rtcEngine.setVideoProfile(videoProfile, swapWidthAndHeight: false)
+        rtcEngine.setVideoProfile(videoProfile, swapWidthAndHeight: true)
         rtcEngine.setClientRole(clientRole, withKey:nil)
         
         if isBroadcaster {
