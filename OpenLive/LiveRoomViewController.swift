@@ -81,6 +81,9 @@ class LiveRoomViewController: NSViewController {
     @IBAction func doBroadcastClicked(_ sender: NSButton) {
         if isBroadcaster {
             clientRole = .clientRole_Audience
+            if fullSession?.uid == 0 {
+                fullSession = nil
+            }
         } else {
             clientRole = .clientRole_Broadcaster
         }
