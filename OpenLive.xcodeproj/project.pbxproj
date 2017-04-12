@@ -10,7 +10,6 @@
 		071CE2311D79362D00B82401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071CE2301D79362D00B82401 /* AppDelegate.swift */; };
 		071CE2351D79362D00B82401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071CE2341D79362D00B82401 /* Assets.xcassets */; };
 		071CE2381D79362D00B82401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 071CE2361D79362D00B82401 /* Main.storyboard */; };
-		073177F31D8006720062A68C /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073177F21D8006720062A68C /* AgoraRtcEngineKit.framework */; };
 		075589691D79531A004B0DEA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075589651D79531A004B0DEA /* MainViewController.swift */; };
 		0755896A1D79531A004B0DEA /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075589661D79531A004B0DEA /* MainWindowController.swift */; };
 		0755896B1D79531A004B0DEA /* LiveRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075589671D79531A004B0DEA /* LiveRoomViewController.swift */; };
@@ -27,6 +26,8 @@
 		0755898A1D796F1B004B0DEA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075589891D796F1B004B0DEA /* CoreAudio.framework */; };
 		0755898D1D796FFC004B0DEA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0755898B1D796FA1004B0DEA /* libc++.tbd */; };
 		075589A61D7D44C8004B0DEA /* ReplacementSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075589A51D7D44C8004B0DEA /* ReplacementSegue.swift */; };
+		07D29C3E1E9E1A6300C3583C /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D29C3D1E9E1A6300C3583C /* AgoraRtcEngineKit.framework */; };
+		07D29C411E9E1ABD00C3583C /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D29C401E9E1ABD00C3583C /* libresolv.tbd */; };
 		07F5319D1E289ED4009BFE58 /* OpenLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5319C1E289ED4009BFE58 /* OpenLiveUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +47,6 @@
 		071CE2341D79362D00B82401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		071CE2371D79362D00B82401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		071CE2391D79362D00B82401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		073177F21D8006720062A68C /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
 		0755895F1D794F9F004B0DEA /* OpenLive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenLive-Bridging-Header.h"; sourceTree = "<group>"; };
 		075589651D79531A004B0DEA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		075589661D79531A004B0DEA /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		075589891D796F1B004B0DEA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0755898B1D796FA1004B0DEA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		075589A51D7D44C8004B0DEA /* ReplacementSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacementSegue.swift; sourceTree = "<group>"; };
+		07D29C3D1E9E1A6300C3583C /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		07D29C401E9E1ABD00C3583C /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		07F5319A1E289ED4009BFE58 /* OpenLiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenLiveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F5319C1E289ED4009BFE58 /* OpenLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLiveUITests.swift; sourceTree = "<group>"; };
 		07F5319E1E289ED4009BFE58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,7 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				073177F31D8006720062A68C /* AgoraRtcEngineKit.framework in Frameworks */,
+				07D29C411E9E1ABD00C3583C /* libresolv.tbd in Frameworks */,
+				07D29C3E1E9E1A6300C3583C /* AgoraRtcEngineKit.framework in Frameworks */,
 				0755898D1D796FFC004B0DEA /* libc++.tbd in Frameworks */,
 				0755898A1D796F1B004B0DEA /* CoreAudio.framework in Frameworks */,
 				075589881D796F15004B0DEA /* CoreWLAN.framework in Frameworks */,
@@ -102,6 +105,7 @@
 				071CE22F1D79362D00B82401 /* OpenLive */,
 				07F5319B1E289ED4009BFE58 /* OpenLiveUITests */,
 				071CE22E1D79362D00B82401 /* Products */,
+				07D29C3F1E9E1ABD00C3583C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +131,7 @@
 				075589771D7967CB004B0DEA /* VideoViewLayouter.swift */,
 				0755896F1D796338004B0DEA /* MediaInfo.swift */,
 				075589A51D7D44C8004B0DEA /* ReplacementSegue.swift */,
-				073177F11D8006720062A68C /* libs */,
+				07D29C3D1E9E1A6300C3583C /* AgoraRtcEngineKit.framework */,
 				075589A71D7D506E004B0DEA /* Frameworks */,
 				071CE2301D79362D00B82401 /* AppDelegate.swift */,
 				071CE2341D79362D00B82401 /* Assets.xcassets */,
@@ -135,15 +139,6 @@
 				0755895F1D794F9F004B0DEA /* OpenLive-Bridging-Header.h */,
 			);
 			path = OpenLive;
-			sourceTree = "<group>";
-		};
-		073177F11D8006720062A68C /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				073177F21D8006720062A68C /* AgoraRtcEngineKit.framework */,
-			);
-			path = libs;
-			name = libs;
 			sourceTree = "<group>";
 		};
 		075589A71D7D506E004B0DEA /* Frameworks */ = {
@@ -157,6 +152,14 @@
 				075589811D796EDE004B0DEA /* AudioToolbox.framework */,
 				0755897F1D796EBE004B0DEA /* VideoToolbox.framework */,
 				0755897D1D796EB6004B0DEA /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		07D29C3F1E9E1ABD00C3583C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07D29C401E9E1ABD00C3583C /* libresolv.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -411,7 +414,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OpenLive/libs",
+					"$(PROJECT_DIR)/OpenLive",
 				);
 				INFOPLIST_FILE = OpenLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -431,7 +434,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OpenLive/libs",
+					"$(PROJECT_DIR)/OpenLive",
 				);
 				INFOPLIST_FILE = OpenLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -503,6 +506,7 @@
 				07F531A21E289ED4009BFE58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

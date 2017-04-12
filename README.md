@@ -1,4 +1,4 @@
-# OpenLive_macOS
+# OpenLive macOS
 
 Agora OpenLive is a demo of [Agora.io](http://www.agora.io) Interactive Broadcasting - macOS
 
@@ -59,7 +59,7 @@ This demo does not include broadcasting business server. Developers can build yo
 
 ## Bug reports
 
-* https://github.com/AgoraLab/OpenLive_macOS/issues
+* https://github.com/AgoraIO/OpenLive-macOS/issues
 
 
 ## Build Instructions
@@ -72,7 +72,7 @@ NOTICE: before building, you need to
 	you can get your vendor key at https://dashboard.agora.io
 
 
-2. update libraries at OpenLive/libs
+2. update libraries at OpenLive
 
 
 Enjoy video broadcasting!
