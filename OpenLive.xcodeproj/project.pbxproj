@@ -30,6 +30,7 @@
 		07D29C411E9E1ABD00C3583C /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D29C401E9E1ABD00C3583C /* libresolv.tbd */; };
 		07F5319D1E289ED4009BFE58 /* OpenLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5319C1E289ED4009BFE58 /* OpenLiveUITests.swift */; };
 		0F2747C81FB453B6005D3DBA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2747C71FB453AA005D3DBA /* SystemConfiguration.framework */; };
+		EE181F6BC4EA9A6D167877CD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AC0D4CA14477ED2DD51221 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		07F5319C1E289ED4009BFE58 /* OpenLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLiveUITests.swift; sourceTree = "<group>"; };
 		07F5319E1E289ED4009BFE58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F2747C71FB453AA005D3DBA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A5AC0D4CA14477ED2DD51221 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				075589821D796EDE004B0DEA /* AudioToolbox.framework in Frameworks */,
 				075589801D796EBE004B0DEA /* VideoToolbox.framework in Frameworks */,
 				0755897E1D796EB6004B0DEA /* AVFoundation.framework in Frameworks */,
+				EE181F6BC4EA9A6D167877CD /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +167,7 @@
 			children = (
 				0F2747C71FB453AA005D3DBA /* SystemConfiguration.framework */,
 				07D29C401E9E1ABD00C3583C /* libresolv.tbd */,
+				A5AC0D4CA14477ED2DD51221 /* Accelerate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
