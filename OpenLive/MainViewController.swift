@@ -15,13 +15,6 @@ class MainViewController: NSViewController {
     var videoProfile = AgoraVideoProfile.landscape360P
     fileprivate var agoraKit: AgoraRtcEngineKit!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.white.cgColor
-    }
-    
     override func viewDidAppear() {
         super.viewDidAppear()
         roomInputTextField.becomeFirstResponder()
